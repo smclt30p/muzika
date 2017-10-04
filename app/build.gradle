@@ -19,7 +19,7 @@ android {
     }
     sourceSets {
         main {
-            jniLibs.srcDir(["lib/build/out/libfmod", "lib/build/out/libmuzika"])
+            jniLibs.srcDir(["lib/build/out/"])
         }
     }
 }
@@ -27,7 +27,7 @@ android {
 
 
 dependencies {
-    compile fileTree(dir: 'external', include: ['*.jar'])
+    compile fileTree(dir: 'lib/build/out', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

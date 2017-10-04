@@ -55,6 +55,8 @@ public class MediaScanner extends AsyncTask<Void, Void, ArrayList<Track>> {
 
     private ArrayList<Track> walkedFiles = new ArrayList<>();
     private MediaScannerFinishedListener listener;
+    private TrackMetadataReader metadataReader = new TrackMetadataReader();
+
     private final String root;
 
     /**
@@ -95,11 +97,26 @@ public class MediaScanner extends AsyncTask<Void, Void, ArrayList<Track>> {
             if (!file.canRead()) continue;
             if (file.isDirectory()) {
                 walk(file);
-                return;
             }
+            System.out.println(file.getAbsolutePath());
             if (!isFileSupported(file)) continue;
             Track track = new Track();
             track.setFile(file);
+
+
+            metadataReader.openFile(file.getAbsolutePath());
+
+            System.out.println(String.format(
+                    "Song: %s\n" +
+                    "Artist: %s\n" +
+                    "Album: %s\n",
+                    metadataReader.getTitle(),
+                    metadataReader.getArtist(),
+                    metadataReader.getAlbum()
+            ));
+
+
+            metadataReader.closeFile();
             walkedFiles.add(track);
         }
     }

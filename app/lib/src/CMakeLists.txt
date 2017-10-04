@@ -11,6 +11,7 @@ include(taglib.cmake)
 set(libmuzika_srcs
     audio.c
     jni_abstract.cpp
+    tagreader.c
 )
 
 set(libmuzika_hdrs
@@ -18,6 +19,7 @@ set(libmuzika_hdrs
     jni_abstract.hpp
     jni_calls.hpp
     log.h
+    tagreader.h
 )
 
 add_library(muzika SHARED ${libmuzika_srcs} ${libmuzika_hdrs})

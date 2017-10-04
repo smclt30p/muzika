@@ -18,6 +18,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends FragmentActivity {
 
+    static {
+        System.loadLibrary("muzika");
+    }
+
     private ViewPager pager;
     private MasterFragmentAdapter masterPagerAdapter;
     private MediaScanner mediaScanner;
@@ -37,12 +41,7 @@ public class MainActivity extends FragmentActivity {
         mediaScanner.addFinishListener(new MediaScannerFinishedListener() {
             @Override
             public void publishMedia(ArrayList<Track> tracks) {
-
-                for (Track track : tracks) {
-                    File origin = track.getFile();
-                    System.out.println(origin.getAbsolutePath());
-                }
-
+                System.out.println("Media scan done.");
             }
         });
 

@@ -26,8 +26,12 @@ ExternalProject_Add(
                     ${CMAKE_COMMAND} -E copy
                     ${CMAKE_CURRENT_BINARY_DIR}/build/taglib/${ANDROID_ABI}/lib/libtag.so
                     ${CMAKE_SUPERBUILD_OUT}/${ANDROID_ABI}/libtag.so
+                    &&
+                    ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_BINARY_DIR}/build/taglib/${ANDROID_ABI}/lib/libtag_c.so
+                    ${CMAKE_SUPERBUILD_OUT}/${ANDROID_ABI}/libtag_c.so
 )
 
 add_library(tag SHARED IMPORTED)
-set_target_properties(tag PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/build/taglib/${ANDROID_ABI}/lib/libtag.so)
+set_target_properties(tag PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/build/taglib/${ANDROID_ABI}/lib/libtag_c.so)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/build/taglib/${ANDROID_ABI}/include)

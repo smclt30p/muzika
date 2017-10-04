@@ -1,6 +1,7 @@
 #include <jni.h>
 
 #include "audio.h"
+#include "tagreader.h"
 #include "jni_abstract.hpp"
 
 JNI_CALL void AudioService_init() {
@@ -25,4 +26,40 @@ void AudioService_setCurrentPosition(int64_t position) {
 
 int64_t AudioService_getStreamLength() {
     return audio_get_stream_length();
+}
+
+void TrackMetadataReader_openFile(const char *path) {
+    tag_open_file(path);
+}
+
+void TrackMetadataReader_closeFile() {
+    tag_close_file();
+}
+
+char* TrackMetadataReader_getArtist() {
+    return tag_get_artist();
+}
+
+char* TrackMetadataReader_getAlbum() {
+    return tag_get_album();
+}
+
+char* TrackMetadataReader_getTitle() {
+    return tag_get_title();
+}
+
+char* TrackMetadataReader_getGenre() {
+    return tag_get_genre();
+}
+
+char* TrackMetadataReader_getComment() {
+    return tag_get_comment();
+}
+
+int32_t TrackMetadataReader_getYear() {
+    return tag_get_year();
+}
+
+int32_t TrackMetadataReader_getTrackNumber() {
+    return tag_get_trackno();
 }
