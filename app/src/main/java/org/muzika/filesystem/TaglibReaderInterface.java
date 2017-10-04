@@ -1,6 +1,6 @@
 package org.muzika.filesystem;
 
-public interface TablibReaderInterface {
+interface TaglibReaderInterface {
     int openFile(String path);
     void closeFile();
     String getArtist();

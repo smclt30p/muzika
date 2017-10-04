@@ -1,6 +1,6 @@
 package org.muzika.filesystem;
 
-public class TrackMetadataReader implements TablibReaderInterface {
+public class TrackMetadataReader implements TaglibReaderInterface {
     @Override public native int openFile(String path);
     @Override public native void closeFile();
     @Override public native String getArtist();
