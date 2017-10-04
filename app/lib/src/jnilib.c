@@ -1,8 +1,9 @@
 #include <jni.h>
+#include <stdbool.h>
 
 #include "audio.h"
 #include "tagreader.h"
-#include "jnilib.hpp"
+#include "jnilib.h"
 
 JNI_CALL void AudioService_init() {
     audio_init();

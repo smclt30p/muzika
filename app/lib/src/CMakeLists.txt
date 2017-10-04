@@ -10,14 +10,14 @@ include(taglib.cmake)
 
 set(libmuzika_srcs
     audio.c
-    jnilib.cpp
+    jnilib.c
     tagreader.c
 )
 
 set(libmuzika_hdrs
     audio.h
-    jnilib.hpp
-    jnireceiver.hpp
+    jnilib.h
+    jnireceiver.h
     log.h
     tagreader.h
 )

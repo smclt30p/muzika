@@ -31,5 +31,5 @@ JNI_CALL    char*       TrackMetadataReader_getComment          ();
 JNI_CALL    int32_t     TrackMetadataReader_getYear             ();
 JNI_CALL    int32_t     TrackMetadataReader_getTrackNumber      ();
 
-#include "jnireceiver.hpp"
+#include "jnireceiver.h"
 #endif // JNI_ABSTRACT_H
