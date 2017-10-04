@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 3.6)
 project(libmuzika)
 
 # unpack/link to FMOD
-include(fmod.cmake)
+include(cmake/fmod.cmake)
 
 # build taglib
-include(taglib.cmake)
+include(cmake/taglib.cmake)
 
 set(libmuzika_srcs
     audio.c
