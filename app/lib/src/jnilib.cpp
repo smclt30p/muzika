@@ -2,7 +2,7 @@
 
 #include "audio.h"
 #include "tagreader.h"
-#include "jni_abstract.hpp"
+#include "jnilib.hpp"
 
 JNI_CALL void AudioService_init() {
     audio_init();
