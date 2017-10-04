@@ -2,10 +2,6 @@
 // These are all the messy JNI call-names here, through-calling
 // the actual methods
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 JNIEXPORT void JNICALL
 Java_org_muzika_audio_AudioService_init(JNIEnv *env, jobject instance) {
     AudioService_init();
@@ -107,7 +103,4 @@ Java_org_muzika_filesystem_TrackMetadataReader_getTrackNumber(JNIEnv *env, jobje
     return TrackMetadataReader_getTrackNumber();
 }
 
-#ifdef __cplusplus
-}
-#endif
 

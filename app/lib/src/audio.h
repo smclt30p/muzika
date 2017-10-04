@@ -4,10 +4,6 @@
 #include "fmod_common.h"
 #include "fmod_errors.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 typedef struct {
     FMOD_SYSTEM *system;
     FMOD_SOUND *stream;
@@ -24,9 +20,5 @@ void        audio_play                      (const char* path);
 int64_t     audio_get_current_position      ();
 void        audio_set_current_position      (int64_t position);
 int64_t     audio_get_stream_length         ();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // AUDIO_H

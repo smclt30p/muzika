@@ -16,9 +16,6 @@ typedef struct {
     int trackno;
 } TrackInfo;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 int    tag_open_file       (const char *path);
 void    tag_close_file      ();
@@ -30,8 +27,5 @@ char*   tag_get_comment     ();
 int     tag_get_year        ();
 int     tag_get_trackno     ();
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif // TAGREADER_H
