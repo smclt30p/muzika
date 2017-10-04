@@ -1,6 +1,8 @@
 package org.muzika.filesystem;
 
-public class TrackMetadataReader implements TaglibReaderInterface {
+import java.io.Closeable;
+
+class TrackMetadataReader implements TaglibReaderInterface, Closeable {
     @Override public native int openFile(String path);
     @Override public native void closeFile();
     @Override public native String getArtist();
@@ -10,4 +12,9 @@ public class TrackMetadataReader implements TaglibReaderInterface {
     @Override public native String getComment();
     @Override public native int getYear();
     @Override public native int getTrackNumber();
+
+    @Override
+    public void close() {
+        closeFile();
+    }
 }

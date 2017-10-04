@@ -119,7 +119,7 @@ public class MediaScanner extends AsyncTask<Void, Void, ArrayList<Track>> {
             ));
 
 
-            metadataReader.closeFile();
+            metadataReader.close();
             walkedFiles.add(track);
         }
     }
