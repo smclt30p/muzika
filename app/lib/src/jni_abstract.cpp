@@ -28,8 +28,8 @@ int64_t AudioService_getStreamLength() {
     return audio_get_stream_length();
 }
 
-void TrackMetadataReader_openFile(const char *path) {
-    tag_open_file(path);
+int TrackMetadataReader_openFile(const char *path) {
+    return tag_open_file(path);
 }
 
 void TrackMetadataReader_closeFile() {

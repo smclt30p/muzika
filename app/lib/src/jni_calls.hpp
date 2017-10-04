@@ -45,13 +45,13 @@ Java_org_muzika_audio_AudioService_getStreamLength(JNIEnv *env, jobject instance
     return AudioService_getStreamLength();
 }
 
-JNIEXPORT jobject JNICALL
+JNIEXPORT jint JNICALL
 Java_org_muzika_filesystem_TrackMetadataReader_openFile(JNIEnv *env, jobject instance, jstring path) {
 
     const char *_path = env->GetStringUTFChars(path, 0);
-    TrackMetadataReader_openFile(_path);
+    int status = TrackMetadataReader_openFile(_path);
     env->ReleaseStringUTFChars(path, _path);
-    return NULL;
+    return status;
 }
 
 JNIEXPORT jobject JNICALL

@@ -21,7 +21,7 @@ JNI_CALL    void        AudioService_setPaused                  (bool state);
 JNI_CALL    void        AudioService_playStream                 (const char *path);
 
 /* org.muzika.filesystem.TrackMetadataReader */
-JNI_CALL    void        TrackMetadataReader_openFile            (const char *path);
+JNI_CALL    int         TrackMetadataReader_openFile            (const char *path);
 JNI_CALL    void        TrackMetadataReader_closeFile           ();
 JNI_CALL    char*       TrackMetadataReader_getArtist           ();
 JNI_CALL    char*       TrackMetadataReader_getAlbum            ();

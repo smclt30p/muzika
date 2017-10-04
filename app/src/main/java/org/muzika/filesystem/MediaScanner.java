@@ -103,8 +103,11 @@ public class MediaScanner extends AsyncTask<Void, Void, ArrayList<Track>> {
             Track track = new Track();
             track.setFile(file);
 
-
-            metadataReader.openFile(file.getAbsolutePath());
+            if (metadataReader.openFile(file.getAbsolutePath()) != 0) {
+                System.err.println("Unsupported file by TagLib: " + file.getAbsolutePath());
+                walkedFiles.add(track);
+                continue;
+            }
 
             System.out.println(String.format(
                     "Song: %s\n" +

@@ -4,11 +4,12 @@
 
 TrackInfo info;
 
-void tag_open_file(const char *path) {
+int tag_open_file(const char *path) {
 
     info.file = taglib_file_new(path);
     if (info.file == NULL) {
         LOG("Error opening file for tag reading: %s", path);
+        return -1;
     }
     info.tag = taglib_file_tag(info.file);
     info.artist = taglib_tag_artist(info.tag);
@@ -18,6 +19,7 @@ void tag_open_file(const char *path) {
     info.genre = taglib_tag_genre(info.tag);
     info.year = (int) taglib_tag_year(info.tag);
     info.trackno = (int) taglib_tag_track(info.tag);
+    return 0;
 
 }
 

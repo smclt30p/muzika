@@ -20,7 +20,7 @@ typedef struct {
 extern "C" {
 #endif
 
-void    tag_open_file       (const char *path);
+int    tag_open_file       (const char *path);
 void    tag_close_file      ();
 char*   tag_get_artist      ();
 char*   tag_get_album       ();
