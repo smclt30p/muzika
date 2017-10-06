@@ -16,6 +16,8 @@
       <w>redirector</w>
       <w>soundsystem</w>
       <w>srcs</w>
+      <w>stdbool</w>
+      <w>uint</w>
       <w>vorbis</w>
       <w>xbox</w>
     </words>
