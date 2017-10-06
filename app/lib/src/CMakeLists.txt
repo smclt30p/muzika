@@ -12,6 +12,8 @@ set(libmuzika_srcs
     audio.c
     jnilib.c
     tagreader.c
+    library.c
+    list.c
 )
 
 set(libmuzika_hdrs
@@ -20,6 +22,8 @@ set(libmuzika_hdrs
     jnireceiver.h
     log.h
     tagreader.h
+    library.h
+    list.h
 )
 
 add_library(muzika SHARED ${libmuzika_srcs} ${libmuzika_hdrs})
