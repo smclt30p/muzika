@@ -203,7 +203,7 @@ bool list_contains_all(list_t* list, list_t* list_another) {
 
     for (uint64_t i = 0; i < list->size; i++) {
         void *a = list_get(list, i);
-        void *b = list_get(list, i);
+        void *b = list_get(list_another, i);
         if (a != b) {
             return false;
         }
