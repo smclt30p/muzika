@@ -236,10 +236,12 @@ void list_clear(list_t* list) {
 
     while (pointer->next != NULL) {
         pointer_save = pointer->next;
+        free(pointer->data);
         free(pointer);
         pointer = pointer_save;
     }
 
+    free(pointer_save->data);
     free(pointer_save);
 
     list->size = 0;
