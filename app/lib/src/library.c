@@ -25,3 +25,23 @@
 */
 
 #include "library.h"
+#include "list.h"
+#include "log.h"
+
+list_t *songs;
+
+int tree_file_process(const char *fpath, const struct stat *sb, int typeflag) {
+
+    if (typeflag != FTW_F) {
+        return SCAN_CONTINUE;
+    }
+
+    log_info("File path: %s", fpath);
+
+    return SCAN_CONTINUE;
+}
+
+void scan_library(const char* path) {
+    songs = list_new();
+    int check = ftw("/storage", tree_file_process, 50);
+}

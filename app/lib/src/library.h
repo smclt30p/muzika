@@ -28,6 +28,10 @@
 #define MUZIKA_LIBRARY_H
 
 #include<stdint.h>
+#include<ftw.h>
+
+#define SCAN_CONTINUE 0
+#define SCAN_CANCEL 1
 
 typedef struct {
     char *name;
@@ -49,5 +53,8 @@ typedef struct {
     artist_t *artist;
     album_t *album;
 } track_t;
+
+
+void    scan_library        (const char* path);
 
 #endif //MUZIKA_LIBRARY_H
