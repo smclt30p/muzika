@@ -30,18 +30,64 @@
 
 list_t *songs;
 
+bool file_is_supported(const char *fpath) {
+
+    /* get the index of the last byte of the string */
+    size_t len_path = strlen(fpath) - 1;
+
+    /* traverse the string from the back to find the '.' character */
+    const char* temp = fpath;
+    while (len_path != 0) {
+        if (*(temp + len_path) == '.') {
+            break;
+        }
+        len_path--;
+    }
+
+    /* reached start of string, no extension */
+    if (len_path == 0) {
+        return false;
+    }
+
+    /* pointer to the file extension */
+    const char *extension = temp + ++len_path;
+
+    /* check if file is supported */
+    char** ptr = supported_formats;
+    while (*ptr != NULL) {
+        if (strcmp(extension, *ptr) == 0) {
+            return true;
+        }
+        ptr++;
+    }
+
+    return false;
+
+}
+
 int tree_file_process(const char *fpath, const struct stat *sb, int typeflag) {
 
-    if (typeflag != FTW_F) {
+    if (typeflag != FTW_F || !file_is_supported(fpath)) {
         return SCAN_CONTINUE;
     }
 
-    log_info("File path: %s", fpath);
+    /* copy temporary path to the heap */
+    void* song = malloc((strlen(fpath) + 1) * sizeof(char*));
+    strcpy((char*) song, fpath);
+    list_add(songs, song);
 
     return SCAN_CONTINUE;
 }
 
-void scan_library(const char* path) {
+void library_scan(const char* path) {
+    log_info("Starting library scan...");
     songs = list_new();
-    int check = ftw("/storage", tree_file_process, 50);
+    ftw("/storage", tree_file_process, 50);
+
+    for (uint64_t i = 0; i < songs->size; i++) {
+        char* song = (char*) list_get(songs, i);
+        log_info("song found: %s", song);
+        free(song);
+    }
+
 }

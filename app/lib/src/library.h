@@ -29,9 +29,21 @@
 
 #include<stdint.h>
 #include<ftw.h>
+#include<string.h>
+#include<stdbool.h>
 
 #define SCAN_CONTINUE 0
 #define SCAN_CANCEL 1
+
+static char *supported_formats[] = {
+    "aiff","aif","aifc","asf",
+    "wma","asx","dls","flac",
+    "fsb","it","mid","midi",
+    "mod","mp2","mpeg2","mp3",
+    "mpeg3","ogg","oga","pls",
+    "s3m","vag","wav","wax",
+    "xm", NULL
+};
 
 typedef struct {
     char *name;
@@ -55,6 +67,6 @@ typedef struct {
 } track_t;
 
 
-void    scan_library        (const char* path);
+void    library_scan        (const char* path);
 
 #endif //MUZIKA_LIBRARY_H
