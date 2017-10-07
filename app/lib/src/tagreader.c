@@ -33,7 +33,7 @@ int tag_open_file(const char *path) {
 
     info.file = taglib_file_new(path);
     if (info.file == NULL) {
-        LOG("Error opening file for tag reading: %s", path);
+        log_error("Error opening file for tag reading: %s", path);
         return -1;
     }
     info.tag = taglib_file_tag(info.file);

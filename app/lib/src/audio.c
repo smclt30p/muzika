@@ -35,7 +35,7 @@ Player player;
 
 void audio_check_error(FMOD_RESULT result) {
     if (result != FMOD_OK) {
-        LOG("FMOD Error: %s", FMOD_ErrorString(result))
+        log_info("FMOD Error: %s", FMOD_ErrorString(result))
     }
 }
 
@@ -51,36 +51,36 @@ void audio_init() {
     audio_check_error(FMOD_System_SetOutput(player.system, FMOD_OUTPUTTYPE_ALSA));
     audio_check_error(FMOD_System_Init(player.system, 10, FMOD_INIT_NORMAL, 0));
     audio_check_error(FMOD_System_GetVersion(player.system, &player.fmod_version));
-    LOG("audio: initializing FMOD version %d", player.fmod_version);
-    LOG("audio: running sound card detection");
+    log_info("audio: initializing FMOD version %d", player.fmod_version);
+    log_info("audio: running sound card detection");
     audio_check_error(FMOD_System_GetNumDrivers(player.system, &player.cards_num));
     if (player.cards_num == 0) {
-        LOG("audio: fatal error: no sound cards detected");
+        log_error("audio: fatal error: no sound cards detected");
         audio_close();
         return;
     }
-    LOG("audio: detected %d sound card(s)", player.cards_num);
-    LOG("audio: FMOD initialized");
+    log_info("audio: detected %d sound card(s)", player.cards_num);
+    log_info("audio: FMOD initialized");
 }
 
 void audio_set_paused(bool state) {
     if (!player.channel_is_valid) {
-        LOG("audio_set_paused: can't pause invalid channel");
+        log_error("audio_set_paused: can't pause invalid channel");
         return;
     }
-    LOG("audio_set_paused: channel is valid")
+    log_info("audio_set_paused: channel is valid")
     FMOD_BOOL playing;
     audio_check_error(FMOD_Channel_IsPlaying(player.channel, &playing));
     if (!playing && !state) {
-        LOG("audio_set_paused: channel is not playing, can't pause");
+        log_error("audio_set_paused: channel is not playing, can't pause");
         return;
     }
-    LOG("audio_set_paused: setting channel pause state: %d", state);
+    log_info("audio_set_paused: setting channel pause state: %d", state);
     audio_check_error(FMOD_Channel_SetPaused(player.channel, state));
 }
 
 void audio_play(const char *path) {
-    LOG("audio_play: playing %s", path);
+    log_info("audio_play: playing %s", path);
     if (player.stream_is_valid) {
         audio_check_error(FMOD_Sound_Release(player.stream));
         player.stream_is_valid = false;
@@ -102,7 +102,7 @@ int64_t audio_get_current_position() {
     uint32_t position;
     FMOD_RESULT result = FMOD_Channel_GetPosition(player.channel, &position, FMOD_TIMEUNIT_MS);
     if (result != FMOD_OK) {
-        LOG("audio_get_playing_offset: fmod error: %s", FMOD_ErrorString(result));
+        log_error("audio_get_playing_offset: fmod error: %s", FMOD_ErrorString(result));
         return -1;
     }
     return (int64_t) position;
@@ -112,7 +112,7 @@ void audio_set_current_position(int64_t position) {
     if (!player.channel_is_valid || !player.stream_is_valid) {
         return;
     }
-    LOG("audio_set_current_position: seeking to %lld", position);
+    log_info("audio_set_current_position: seeking to %lld", position);
     audio_check_error(FMOD_Channel_SetPosition(player.channel, (uint32_t) position, FMOD_TIMEUNIT_MS));
 }
 

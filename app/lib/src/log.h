@@ -25,4 +25,6 @@
 */
 
 #include <android/log.h>
-#define LOG(...) __android_log_print(ANDROID_LOG_INFO, "log" , __VA_ARGS__);
+
+#define log_info(...) __android_log_print(ANDROID_LOG_INFO, "libmuzika" , __VA_ARGS__);
+#define log_error(...) __android_log_print(ANDROID_LOG_ERROR, "libmuzika", __VA_ARGS__);
