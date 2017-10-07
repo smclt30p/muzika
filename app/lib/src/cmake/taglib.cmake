@@ -12,6 +12,7 @@ ExternalProject_Add(
                       ${CMAKE_CURRENT_BINARY_DIR}/taglib/src/taglib
                       -DCMAKE_SYSTEM_NAME=Android
                       -DCMAKE_ANDROID_API=${ANDROID_NATIVE_API_LEVEL}
+                      -DANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL}
                       -DCMAKE_ANDROID_ARCH_ABI=${ANDROID_ABI}
                       -DANDROID_ABI=${ANDROID_ABI}
                       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
