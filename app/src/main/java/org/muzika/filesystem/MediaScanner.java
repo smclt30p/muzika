@@ -33,7 +33,6 @@ import org.muzika.model.Library;
 import org.muzika.model.Track;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -86,9 +85,9 @@ public class MediaScanner extends AsyncTask<Void, Void, Library> {
      */
     private Album createAlbum(Track track) {
         Album album = new Album();
-        album.setName(track.getAlbum());
+        album.setName(track.getAlbumString());
         album.setYear(track.getYear());
-        album.setDescription(track.getAlbum());
+        album.setDescription(track.getAlbumString());
         return album;
     }
 
@@ -108,23 +107,20 @@ public class MediaScanner extends AsyncTask<Void, Void, Library> {
 
             library.getTracks().add(track);
 
-            if (track.getArtist().equalsIgnoreCase("") ||
-                track.getTitle().equalsIgnoreCase("") ||
-                track.getAlbum().equalsIgnoreCase("")) {
-                library.getInvalidTags().add(track);
-                continue;
-            }
-
-            int artistIndex = find(library.getArtists(), track.getArtist(), SearchType.ARTIST);
+            int artistIndex = find(library.getArtists(), track.getArtistString(), SearchType.ARTIST);
             if (artistIndex == FIND_NOT_FOUND) {
                 /* artist was not found */
                 Artist artist = new Artist();
-                artist.setName(track.getArtist());
+                artist.setName(track.getArtistString());
 
                 Album album = createAlbum(track);
-
+                album.setArtist(artist);
                 album.getTracks().add(track);
+
                 artist.getAlbums().add(album);
+
+                track.setArtist(artist);
+                track.setAlbum(album);
 
                 library.getArtists().add(artist);
                 library.getAlbums().add(album);
@@ -132,18 +128,21 @@ public class MediaScanner extends AsyncTask<Void, Void, Library> {
             } else {
                 /* artist was found */
                 Artist artist = library.getArtists().get(artistIndex);
-                int albumIndex = find(artist.getAlbums(), track.getAlbum(), SearchType.ALBUM);
+                int albumIndex = find(artist.getAlbums(), track.getAlbumString(), SearchType.ALBUM);
 
                 if (albumIndex == FIND_NOT_FOUND) {
                     /* album not found */
                     Album album = createAlbum(track);
                     album.getTracks().add(track);
                     artist.getAlbums().add(album);
+                    album.setArtist(artist);
+                    track.setAlbum(album);
                     library.getAlbums().add(album);
                 } else {
                     /* album found */
                     Album album = artist.getAlbums().get(albumIndex);
                     album.getTracks().add(track);
+                    track.setAlbum(album);
                 }
             }
         }
@@ -185,9 +184,9 @@ public class MediaScanner extends AsyncTask<Void, Void, Library> {
                 continue;
             }
 
-            track.setTitle(metadataReader.getTitle());
-            track.setArtist(metadataReader.getArtist());
-            track.setAlbum(metadataReader.getAlbum());
+            track.setTitleString(metadataReader.getTitle());
+            track.setArtistString(metadataReader.getArtist());
+            track.setAlbumString(metadataReader.getAlbum());
             track.setComment(metadataReader.getComment());
             track.setBitrate(metadataReader.getBitRate());
             track.setTrackNumber(metadataReader.getTrackNumber());
@@ -196,6 +195,14 @@ public class MediaScanner extends AsyncTask<Void, Void, Library> {
             track.setLength(metadataReader.getLength());
 
             metadataReader.close();
+
+            if (track.getArtistString().equalsIgnoreCase("") ||
+                    track.getTitleString().equalsIgnoreCase("") ||
+                    track.getAlbumString().equalsIgnoreCase("")) {
+                library.getInvalidTags().add(track);
+                return;
+            }
+
             walkedFiles.add(track);
         }
     }
