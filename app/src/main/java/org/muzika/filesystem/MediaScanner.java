@@ -58,7 +58,7 @@ public class MediaScanner extends AsyncTask<Void, Void, Library> {
             "xm"
     };
 
-    enum SearchType {
+    private enum SearchType {
         ALBUM, ARTIST
     }
 
