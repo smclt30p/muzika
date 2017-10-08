@@ -28,52 +28,37 @@ package org.muzika.model;
 
 import java.util.ArrayList;
 
-public class Artist {
+public class Library {
 
-    private String name;
+    private ArrayList<Track> tracks;
     private ArrayList<Album> albums;
+    private ArrayList<Artist> artists;
+    private ArrayList<Track> invalidTags;
 
-    public Artist() {
+    public Library() {
+        this.tracks = new ArrayList<>();
         this.albums = new ArrayList<>();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.artists = new ArrayList<>();
+        this.invalidTags = new ArrayList<>();
     }
 
     public ArrayList<Album> getAlbums() {
         return albums;
     }
 
-    public void setAlbums(ArrayList<Album> albums) {
-        this.albums = albums;
+    public ArrayList<Artist> getArtists() {
+        return artists;
     }
 
-    @Override
-    public String toString() {
-        return "Artist{" +
-                "name='" + name + '\'' +
-                ", albums=" + albums +
-                '}';
+    public ArrayList<Track> getTracks() {
+        return tracks;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Artist artist = (Artist) o;
-
-        return name.equals(artist.name);
-
+    public ArrayList<Track> getInvalidTags() {
+        return invalidTags;
     }
 
-    @Override
-    public int hashCode() {
-        return name.hashCode();
+    public void setInvalidTags(ArrayList<Track> invalidTags) {
+        this.invalidTags = invalidTags;
     }
 }
