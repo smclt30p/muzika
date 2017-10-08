@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 public class Album {
 
+    private Artist artist;
     private String name;
     private String description;
     private int year;
@@ -95,5 +96,13 @@ public class Album {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 }

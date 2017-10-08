@@ -30,9 +30,11 @@ import java.io.File;
 
 public class Track {
 
-    private String title;
-    private String artist;
-    private String album;
+    private String titleString;
+    private String artistString;
+    private String albumString;
+    private Album album;
+    private Artist artist;
     private File file;
     private String comment;
     private int bitrate;
@@ -44,28 +46,28 @@ public class Track {
     public Track() {
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitleString() {
+        return titleString;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitleString(String titleString) {
+        this.titleString = titleString;
     }
 
-    public String getArtist() {
-        return artist;
+    public String getArtistString() {
+        return artistString;
     }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
+    public void setArtistString(String artistString) {
+        this.artistString = artistString;
     }
 
-    public String getAlbum() {
-        return album;
+    public String getAlbumString() {
+        return albumString;
     }
 
-    public void setAlbum(String album) {
-        this.album = album;
+    public void setAlbumString(String albumString) {
+        this.albumString = albumString;
     }
 
     public String getComment() {
@@ -119,9 +121,9 @@ public class Track {
     @Override
     public String toString() {
         return "Track{" +
-                "title='" + title + '\'' +
-                ", artist='" + artist + '\'' +
-                ", album='" + album + '\'' +
+                "titleString='" + titleString + '\'' +
+                ", artistString='" + artistString + '\'' +
+                ", albumString='" + albumString + '\'' +
                 ", comment='" + comment + '\'' +
                 ", bitrate=" + bitrate +
                 ", trackNumber=" + trackNumber +
@@ -153,5 +155,21 @@ public class Track {
     @Override
     public int hashCode() {
         return file.hashCode();
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 }
