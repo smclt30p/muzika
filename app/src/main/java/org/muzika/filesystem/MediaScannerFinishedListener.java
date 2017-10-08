@@ -25,8 +25,7 @@ package org.muzika.filesystem;
  * POSSIBILITY OF SUCH DAMAGE.
 */
 
-import org.muzika.model.Track;
-import java.util.ArrayList;
+import org.muzika.model.Library;
 
 /**
  * This is a functional interface that can be attached
@@ -34,5 +33,5 @@ import java.util.ArrayList;
  * discovered by scanning.
  */
 public interface MediaScannerFinishedListener {
-    void publishMedia(ArrayList<Track> tracks);
+    void publishMedia(Library library);
 }
