@@ -90,3 +90,15 @@ int32_t TrackMetadataReader_getYear() {
 int32_t TrackMetadataReader_getTrackNumber() {
     return tag_get_trackno();
 }
+
+JNI_CALL int32_t TrackMetadataReader_getBitRate () {
+    return tag_get_bitrate();
+}
+
+JNI_CALL int32_t TrackMetadataReader_getSampleRate () {
+    return tag_get_samplerate();
+}
+
+JNI_CALL int32_t TrackMetadataReader_getLength () {
+    return tag_get_length();
+}

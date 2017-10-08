@@ -56,6 +56,9 @@ JNI_CALL    char*       TrackMetadataReader_getGenre            ();
 JNI_CALL    char*       TrackMetadataReader_getComment          ();
 JNI_CALL    int32_t     TrackMetadataReader_getYear             ();
 JNI_CALL    int32_t     TrackMetadataReader_getTrackNumber      ();
+JNI_CALL    int32_t     TrackMetadataReader_getBitRate          ();
+JNI_CALL    int32_t     TrackMetadataReader_getSampleRate       ();
+JNI_CALL    int32_t     TrackMetadataReader_getLength           ();
 
 #include "jnireceiver.h"
 #endif // JNI_ABSTRACT_H

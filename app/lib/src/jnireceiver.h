@@ -125,4 +125,17 @@ Java_org_muzika_filesystem_TrackMetadataReader_getTrackNumber(JNIEnv *env, jobje
     return TrackMetadataReader_getTrackNumber();
 }
 
+JNIEXPORT jint JNICALL
+Java_org_muzika_filesystem_TrackMetadataReader_getBitRate(JNIEnv *env, jobject instance) {
+    return TrackMetadataReader_getBitRate();
+}
 
+JNIEXPORT jint JNICALL
+Java_org_muzika_filesystem_TrackMetadataReader_getSampleRate(JNIEnv *env, jobject instance) {
+    return TrackMetadataReader_getSampleRate();
+}
+
+JNIEXPORT jint JNICALL
+Java_org_muzika_filesystem_TrackMetadataReader_getLength(JNIEnv *env, jobject instance) {
+    return TrackMetadataReader_getLength();
+}
