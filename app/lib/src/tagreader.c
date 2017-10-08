@@ -32,10 +32,20 @@ TrackInfo info;
 int tag_open_file(const char *path) {
 
     info.file = taglib_file_new(path);
+    info.file_open = false;
+
     if (info.file == NULL) {
         log_error("Error opening file for tag reading: %s", path);
         return -1;
     }
+
+    info.file_open = true;
+
+    if (!taglib_file_is_valid(info.file)) {
+        log_error("Found track with invalid tags: %s", path);
+        return -1;
+    }
+
     info.tag = taglib_file_tag(info.file);
     info.artist = taglib_tag_artist(info.tag);
     info.album = taglib_tag_album(info.tag);
@@ -44,13 +54,20 @@ int tag_open_file(const char *path) {
     info.genre = taglib_tag_genre(info.tag);
     info.year = (int) taglib_tag_year(info.tag);
     info.trackno = (int) taglib_tag_track(info.tag);
+
+    const TagLib_AudioProperties* properties = taglib_file_audioproperties(info.file);
+
+    info.bitrate = taglib_audioproperties_bitrate(properties);
+    info.length = taglib_audioproperties_length(properties);
+    info.samplerate = taglib_audioproperties_samplerate(properties);
+
     return 0;
 
 }
 
 void tag_close_file() {
     taglib_tag_free_strings();
-    taglib_file_free(info.file);
+    if (info.file_open) taglib_file_free(info.file);
 }
 
 char* tag_get_artist() {
@@ -79,4 +96,16 @@ int tag_get_year() {
 
 int tag_get_trackno() {
     return info.trackno;
+}
+
+int tag_get_bitrate() {
+    return info.bitrate;
+}
+
+int tag_get_samplerate() {
+    return info.samplerate;
+}
+
+int tag_get_length() {
+    return info.length;
 }

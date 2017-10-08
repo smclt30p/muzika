@@ -12,6 +12,9 @@ class TrackMetadataReader implements TaglibReaderInterface, Closeable {
     @Override public native String getComment();
     @Override public native int getYear();
     @Override public native int getTrackNumber();
+    @Override public native int getBitRate();
+    @Override public native int getSampleRate();
+    @Override public native int getLength();
 
     @Override
     public void close() {

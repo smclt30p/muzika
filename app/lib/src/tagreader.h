@@ -28,6 +28,7 @@
 #define TAGREADER_H
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include "taglib/tag_c.h"
 
 typedef struct {
@@ -40,6 +41,10 @@ typedef struct {
     char* comment;
     int year;
     int trackno;
+    int samplerate;
+    int bitrate;
+    int length;
+    bool file_open;
 } TrackInfo;
 
 
@@ -52,6 +57,9 @@ char*   tag_get_genre       ();
 char*   tag_get_comment     ();
 int     tag_get_year        ();
 int     tag_get_trackno     ();
+int     tag_get_bitrate     ();
+int     tag_get_samplerate  ();
+int     tag_get_length      ();
 
 
 #endif // TAGREADER_H

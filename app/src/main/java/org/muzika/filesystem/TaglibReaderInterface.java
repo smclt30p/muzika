@@ -10,4 +10,7 @@ interface TaglibReaderInterface {
     String getComment();
     int getYear();
     int getTrackNumber();
+    int getBitRate();
+    int getSampleRate();
+    int getLength();
 }
