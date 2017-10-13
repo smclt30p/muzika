@@ -13,7 +13,7 @@ set(ANDROID_NDK "${ANDROID_SDK}/ndk-bundle")
 set(ANDROID_TOOLCHAIN "${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
 set(ANDROID_MAKE_PROGRAM "${ANDROID_NDK}/prebuilt/${ANDROID_BUILD_HOST_ARCH}/bin/make.exe")
 
-set(ANDROID_TARGET_ABI armeabi-v7a)
+set(ANDROID_TARGET_ABI armeabi-v7a x86)
 
 foreach(ANDROID_ABI ${ANDROID_TARGET_ABI})
 
