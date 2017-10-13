@@ -1,17 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<org.muzika.views.pagers.MasterPagerDrawer xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.muzika.MainActivity"
     android:orientation="vertical"
-    android:background="@android:color/black">
+    android:id="@+id/master_drawer">
 
-    <android.support.v4.view.ViewPager
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/master_view_pager">
-    </android.support.v4.view.ViewPager>
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background"
+            android:contentDescription="@string/background"/>
+
+        <org.muzika.views.pagers.MasterPagerBackground
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"
+            android:alpha="0"
+            android:id="@+id/pager_background">
+        </org.muzika.views.pagers.MasterPagerBackground>
+
+        <org.muzika.views.pagers.MasterPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/master_view_pager">
+        </org.muzika.views.pagers.MasterPager>
+
+        <org.muzika.views.pagers.MasterPagerDecoration
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/master_drawer_decor">
+        </org.muzika.views.pagers.MasterPagerDecoration>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:dividerHeight="0dp"
+        android:divider="@android:color/transparent"
+        android:background="#66000000">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="hello"/>
+
+    </FrameLayout>
+
+</org.muzika.views.pagers.MasterPagerDrawer>
+
+
