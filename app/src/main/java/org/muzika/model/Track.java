@@ -26,9 +26,11 @@
 
 package org.muzika.model;
 
+import android.support.annotation.NonNull;
+
 import java.io.File;
 
-public class Track {
+public class Track implements Comparable<Track> {
 
     private String titleString;
     private String artistString;
@@ -171,5 +173,18 @@ public class Track {
 
     public void setAlbum(Album album) {
         this.album = album;
+    }
+
+    @Override
+    public int compareTo(@NonNull Track track) {
+
+        char local = getTitleString().charAt(0);
+        char foreign = track.getTitleString().charAt(0);
+
+        if (local == foreign) return 0;
+        if (local > foreign) return 1;
+        if (local < foreign) return -1;
+
+        return 0;
     }
 }
