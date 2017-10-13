@@ -81,6 +81,10 @@ void audio_set_paused(bool state) {
 
 void audio_play(const char *path) {
     log_info("audio_play: playing %s", path);
+    if (player.channel_is_valid) {
+        audio_check_error("audio_play_channel_stop", FMOD_Channel_Stop(player.channel));
+        player.channel_is_valid = false;
+    }
     if (player.stream_is_valid) {
         audio_check_error("audio_play_sound_releae", FMOD_Sound_Release(player.stream));
         player.stream_is_valid = false;
