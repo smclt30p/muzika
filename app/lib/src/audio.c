@@ -33,27 +33,27 @@
 
 Player player;
 
-void audio_check_error(FMOD_RESULT result) {
+void audio_check_error(const char* tag, FMOD_RESULT result) {
     if (result != FMOD_OK) {
-        log_info("FMOD Error: %s", FMOD_ErrorString(result))
+        log_info("error %s: %s",tag, FMOD_ErrorString(result))
     }
 }
 
 void audio_close() {
-    audio_check_error(FMOD_System_Close(player.system));
+    audio_check_error("audio_close", FMOD_System_Close(player.system));
 }
 
 void audio_init() {
     player.stream_is_valid = false;
     player.channel_is_valid = false;
-    audio_check_error(FMOD_System_Create(&player.system));
-    audio_check_error(FMOD_System_SetSoftwareFormat(player.system, 44100, FMOD_SPEAKERMODE_STEREO, 2));
-    audio_check_error(FMOD_System_SetOutput(player.system, FMOD_OUTPUTTYPE_ALSA));
-    audio_check_error(FMOD_System_Init(player.system, 10, FMOD_INIT_NORMAL, 0));
-    audio_check_error(FMOD_System_GetVersion(player.system, &player.fmod_version));
+    audio_check_error("system_create", FMOD_System_Create(&player.system));
+    audio_check_error("set_software_format", FMOD_System_SetSoftwareFormat(player.system, 44100, FMOD_SPEAKERMODE_STEREO, 2));
+    audio_check_error("set_output", FMOD_System_SetOutput(player.system, FMOD_OUTPUTTYPE_ALSA));
+    audio_check_error("init", FMOD_System_Init(player.system, 10, FMOD_INIT_NORMAL, 0));
+    audio_check_error("get_version", FMOD_System_GetVersion(player.system, &player.fmod_version));
     log_info("audio: initializing FMOD version %d", player.fmod_version);
     log_info("audio: running sound card detection");
-    audio_check_error(FMOD_System_GetNumDrivers(player.system, &player.cards_num));
+    audio_check_error("get_numdrivers", FMOD_System_GetNumDrivers(player.system, &player.cards_num));
     if (player.cards_num == 0) {
         log_error("audio: fatal error: no sound cards detected");
         audio_close();
@@ -70,27 +70,23 @@ void audio_set_paused(bool state) {
     }
     log_info("audio_set_paused: channel is valid")
     FMOD_BOOL playing;
-    audio_check_error(FMOD_Channel_IsPlaying(player.channel, &playing));
+    audio_check_error("audio_set_paused_is_playing", FMOD_Channel_IsPlaying(player.channel, &playing));
     if (!playing && !state) {
         log_error("audio_set_paused: channel is not playing, can't pause");
         return;
     }
     log_info("audio_set_paused: setting channel pause state: %d", state);
-    audio_check_error(FMOD_Channel_SetPaused(player.channel, state));
+    audio_check_error("audio_set_paused_set_paused", FMOD_Channel_SetPaused(player.channel, state));
 }
 
 void audio_play(const char *path) {
     log_info("audio_play: playing %s", path);
     if (player.stream_is_valid) {
-        audio_check_error(FMOD_Sound_Release(player.stream));
+        audio_check_error("audio_play_sound_releae", FMOD_Sound_Release(player.stream));
         player.stream_is_valid = false;
     }
-    if (player.channel_is_valid) {
-        audio_check_error(FMOD_Channel_Stop(player.channel));
-        player.channel_is_valid = false;
-    }
-    audio_check_error(FMOD_System_CreateStream(player.system, path, FMOD_CREATESTREAM, NULL, &player.stream));
-    audio_check_error(FMOD_System_PlaySound(player.system, player.stream, NULL, false, &player.channel));
+    audio_check_error("audio_play_system_createstream", FMOD_System_CreateStream(player.system, path, FMOD_CREATESTREAM, NULL, &player.stream));
+    audio_check_error("audio_system_playsound", FMOD_System_PlaySound(player.system, player.stream, NULL, false, &player.channel));
     player.stream_is_valid = true;
     player.channel_is_valid = true;
 }
@@ -113,7 +109,7 @@ void audio_set_current_position(int64_t position) {
         return;
     }
     log_info("audio_set_current_position: seeking to %lld", position);
-    audio_check_error(FMOD_Channel_SetPosition(player.channel, (uint32_t) position, FMOD_TIMEUNIT_MS));
+    audio_check_error("audio_set_current_position_channel_setposition", FMOD_Channel_SetPosition(player.channel, (uint32_t) position, FMOD_TIMEUNIT_MS));
 }
 
 int64_t audio_get_stream_length() {
@@ -121,6 +117,6 @@ int64_t audio_get_stream_length() {
         return 0;
     }
     unsigned int length;
-    audio_check_error(FMOD_Sound_GetLength(player.stream, &length, FMOD_TIMEUNIT_MS));
+    audio_check_error("audio_get_stream_length", FMOD_Sound_GetLength(player.stream, &length, FMOD_TIMEUNIT_MS));
     return (int64_t) length;
 }
