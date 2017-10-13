@@ -11,7 +11,7 @@ import org.muzika.R;
 public class NowPlayingFragment extends Fragment {
 
     public NowPlayingFragment() {
-        // Required empty public constructor
+        System.out.println("creating now playing");
     }
 
     @Override
