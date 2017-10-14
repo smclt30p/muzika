@@ -33,9 +33,9 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import org.muzika.backport.ArgbEvaluator;
-import org.muzika.views.services.AccentColor;
-import org.muzika.views.services.AccentColorService;
+import org.muzika.views.services.accentcolor.AccentColorFadeEvaluator;
+import org.muzika.views.services.accentcolor.AccentColor;
+import org.muzika.views.services.accentcolor.AccentColorService;
 
 import static org.muzika.core.Logger.debug;
 
@@ -67,7 +67,7 @@ public class MasterPagerBackgroundGradient extends View implements AccentColorSe
     @Override
     public void accentColorChanged(AccentColor color) {
         ObjectAnimator animator = ObjectAnimator.ofInt(this, "gradientColor", color.toARGB());
-        animator.setEvaluator(ArgbEvaluator.getInstance());
+        animator.setEvaluator(AccentColorFadeEvaluator.getInstance());
         animator.setDuration(3000);
         animator.start();
     }

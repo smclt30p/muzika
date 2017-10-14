@@ -28,8 +28,6 @@ package org.muzika.core;
 
 import android.util.Log;
 
-import org.muzika.views.services.AccentColorService;
-
 public class Logger {
 
     private static final boolean ENABLE_DEBUG = true;

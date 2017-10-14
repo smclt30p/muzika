@@ -34,8 +34,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import org.muzika.R;
-import org.muzika.views.services.AccentColor;
-import org.muzika.views.services.AccentColorService;
+import org.muzika.views.services.accentcolor.AccentColor;
+import org.muzika.views.services.accentcolor.AccentColorService;
 
 public class NowPlayingFragment extends Fragment {
 
@@ -44,7 +44,7 @@ public class NowPlayingFragment extends Fragment {
 
     private AccentColor[] colors = {
             AccentColor.fromString("0x55ff0000"),
-            AccentColor.fromString("0x3550ff00"),
+            AccentColor.fromString("0x5550ff00"),
             AccentColor.fromString("0x550000ff")
     };
 
