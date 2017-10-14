@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     tools:context="org.muzika.MainActivity"
     android:orientation="vertical"
     android:id="@+id/master_drawer">
@@ -17,6 +18,14 @@
             android:layout_height="match_parent"
             android:background="@drawable/background"
             android:contentDescription="@string/background"/>
+
+        <org.muzika.views.pagers.MasterPagerBackgroundGradient
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentBottom="true"
+            android:alpha="1"
+            android:id="@+id/master_drawer_gradient">
+        </org.muzika.views.pagers.MasterPagerBackgroundGradient>
 
         <org.muzika.views.pagers.MasterPagerBackground
             android:layout_width="match_parent"
@@ -38,6 +47,32 @@
             android:layout_alignParentBottom="true"
             android:id="@+id/master_drawer_decor">
         </org.muzika.views.pagers.MasterPagerDecoration>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/splash"
+            tools:visibility="gone"
+            android:background="@android:color/black">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="150dp"
+                android:id="@+id/muzika_logo"
+                android:alpha="0"
+                android:src="@drawable/logo"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/fmod_logo"
+                android:alpha="0"
+                android:src="@drawable/fmod"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

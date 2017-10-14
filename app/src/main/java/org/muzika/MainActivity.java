@@ -26,33 +26,19 @@
 
 package org.muzika;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import org.muzika.audio.AudioService;
-import org.muzika.filesystem.MediaScanner;
-import org.muzika.filesystem.MediaScannerFinishedListener;
-import org.muzika.model.Library;
-import org.muzika.model.Track;
-import org.muzika.views.adapters.TrackArrayAdapter;
-import org.muzika.views.fragments.LibraryFragment;
-import org.muzika.views.fragments.NowPlayingFragment;
-import org.muzika.views.fragments.PlaylistFragment;
+import org.muzika.views.pagers.MasterPager;
 import org.muzika.views.pagers.MasterPagerAdapter;
 import org.muzika.views.pagers.MasterPagerBackground;
+import org.muzika.views.pagers.MasterPagerBackgroundGradient;
 import org.muzika.views.pagers.MasterPagerDecoration;
 import org.muzika.views.pagers.MasterPagerDrawer;
-
-import java.util.Collections;
 
 /**
  * This is the master activity of the app, aka. the "Main" activity.
@@ -70,16 +56,15 @@ public class MainActivity extends FragmentActivity {
         System.loadLibrary("muzika");
     }
 
-    private ViewPager pager;
+    private MasterPager pager;
     private MasterPagerAdapter masterPagerAdapter;
     private MasterPagerDrawer drawer;
-    private MediaScanner mediaScanner;
-    private ListView songs;
-    private TrackArrayAdapter adapter;
-    private Library library;
-    private AudioService audio;
     private MasterPagerBackground tint;
     private MasterPagerDecoration decoration;
+    private MasterPagerBackgroundGradient gradient;
+
+    private AudioService audio;
+
 
     /**
      * The onCreate method of the activity. This does a few things:
@@ -91,6 +76,8 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        startAnimation();
+
         audio = new AudioService();
         audio.init();
 
@@ -98,6 +85,7 @@ public class MainActivity extends FragmentActivity {
         pager = findViewById(R.id.master_view_pager);
         drawer = findViewById(R.id.master_drawer);
         decoration = findViewById(R.id.master_drawer_decor);
+        gradient = findViewById(R.id.master_drawer_gradient);
 
         masterPagerAdapter = new MasterPagerAdapter(getSupportFragmentManager());
 
@@ -108,29 +96,36 @@ public class MainActivity extends FragmentActivity {
         pager.addOnPageChangeListener(drawer);
         pager.addOnPageChangeListener(decoration);
 
-        mediaScanner = new MediaScanner("/storage");
-        mediaScanner.addFinishListener(new MediaScannerFinishedListener() {
-            @Override
-            public void publishMedia(Library ne) {
-                library = ne;
-                Collections.sort(library.getTracks());
-                songs = findViewById(R.id.song_list);
-                adapter = new TrackArrayAdapter(getApplicationContext(), library.getTracks());
-                songs.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-                songs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Track track = library.getTracks().get(i);
-                        audio.playStream(track.getFile().getAbsolutePath());
-                    }
-                });
-            }
-        });
+    }
 
-        mediaScanner.execute();
+    /**
+     * Animate the splash screen. There is a
+     * couple of animations started at different times.
+     *
+     * TODO: This should be disable-able in the future.
+     */
+    private void startAnimation() {
 
+        View splash = findViewById(R.id.splash);
+        View logo = findViewById(R.id.muzika_logo);
+        View fmod = findViewById(R.id.fmod_logo);
 
+        ObjectAnimator splashAnimator = ObjectAnimator.ofFloat(splash, "alpha", 1.0f, 0.0f);
+        splashAnimator.setStartDelay(2300);
+        splashAnimator.setDuration(500);
+        splashAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        splashAnimator.start();
+
+        ObjectAnimator logoAnimator = ObjectAnimator.ofFloat(logo, "alpha", 0.0f, 1.0f);
+        logoAnimator.setDuration(800);
+        logoAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        logoAnimator.start();
+
+        ObjectAnimator fmodAnimator = ObjectAnimator.ofFloat(fmod, "alpha", 0.0f, 1.0f);
+        fmodAnimator.setStartDelay(1000);
+        fmodAnimator.setDuration(500);
+        fmodAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        fmodAnimator.start();
 
     }
 
