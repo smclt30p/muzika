@@ -28,6 +28,7 @@ package org.muzika.views.services;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.muzika.views.services.accentcolor.AccentColor;
 
 import static org.junit.Assert.*;
 

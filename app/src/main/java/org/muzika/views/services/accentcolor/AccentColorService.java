@@ -24,7 +24,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.muzika.views.services;
+package org.muzika.views.services.accentcolor;
 
 import java.util.ArrayList;
 
