@@ -48,7 +48,6 @@ void audio_init() {
     player.channel_is_valid = false;
     audio_check_error("system_create", FMOD_System_Create(&player.system));
     audio_check_error("set_software_format", FMOD_System_SetSoftwareFormat(player.system, 44100, FMOD_SPEAKERMODE_STEREO, 2));
-    audio_check_error("set_output", FMOD_System_SetOutput(player.system, FMOD_OUTPUTTYPE_ALSA));
     audio_check_error("init", FMOD_System_Init(player.system, 10, FMOD_INIT_NORMAL, 0));
     audio_check_error("get_version", FMOD_System_GetVersion(player.system, &player.fmod_version));
     log_info("audio: initializing FMOD version %d", player.fmod_version);
