@@ -30,9 +30,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import org.muzika.views.fragments.LibraryFragment;
-import org.muzika.views.fragments.NowPlayingFragment;
-import org.muzika.views.fragments.PlaylistFragment;
+import org.muzika.views.fragments.library.LibraryFragment;
+import org.muzika.views.fragments.nowplaying.NowPlayingFragment;
+import org.muzika.views.fragments.playlist.PlaylistFragment;
 
 /**
  * This is the main pager adapter for the view pager
