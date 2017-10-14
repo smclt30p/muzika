@@ -26,6 +26,9 @@
 
 package org.muzika.views.services;
 
+/**
+ * This class represents a ARGB accent color
+ */
 public class AccentColor {
 
     public int a = 0;
@@ -33,6 +36,13 @@ public class AccentColor {
     public int g = 0;
     public int b = 0;
 
+    /**
+     * Create an accent color from a hexadecimal integer string.
+     * For ex.: 0xff00ff00
+     *
+     * @param color the color string in hexadecimal format (10 chars)
+     * @return the AccentColor from that string
+     */
     public static AccentColor fromString(String color) {
 
         int a = Integer.parseInt(color.substring(2, 4), 16);
@@ -45,6 +55,12 @@ public class AccentColor {
         return AccentColor.fromARGB(argb);
     }
 
+    /**
+     * Create an accent color from a 4-byte ARGB integer
+     *
+     * @param color the 4byte integer describing that color
+     * @return the AccentColor representing that 4byte integer
+     */
     public static AccentColor fromARGB(int color) {
         AccentColor ret = new AccentColor();
         ret.a = (color >> 24) & 0x000000FF;
@@ -54,10 +70,21 @@ public class AccentColor {
         return ret;
     }
 
+    /**
+     * Returns the 4-byte 32bit ARGB representation of the AccentColor
+     *
+     * @return the 4-byte 32bit ARGB representation of the AccentColor
+     */
     public int toARGB() {
         return (a << 24) | (r << 16) | (g << 8) | b;
     }
 
+    /**
+     * Returns the ARGB string representation of the AccentColor. The opposite
+     * of fromARGBString
+     *
+     * @return the ARGB string representation of the AccentColor
+     */
     public String toARGBString() {
         String aS = (a < 9) ? String.format("0%d", a) : String.format("%d", a);
         String rS = (r < 9) ? String.format("0%d", r) : String.format("%d", r);
