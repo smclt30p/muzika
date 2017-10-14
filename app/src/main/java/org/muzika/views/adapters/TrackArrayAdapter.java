@@ -40,14 +40,16 @@ import org.muzika.model.Track;
 
 import java.util.ArrayList;
 
+/**
+ * This is an adapter to display @see Tracks inside
+ * listviews. This is the most basic adapter there is.
+ */
 public class TrackArrayAdapter extends BaseAdapter {
 
-    private final Context context;
     private final ArrayList<Track> tracks;
     private final LayoutInflater inflater;
 
     public TrackArrayAdapter(Context ctx, ArrayList<Track> data) {
-        context = ctx;
         this.tracks = data;
         inflater = LayoutInflater.from(ctx);
     }
