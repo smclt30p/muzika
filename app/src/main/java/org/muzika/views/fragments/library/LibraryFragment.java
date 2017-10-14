@@ -24,7 +24,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.muzika.views.fragments;
+package org.muzika.views.fragments.library;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -47,3 +47,26 @@ public class LibraryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_library, container, false);
     }
 }
+
+/*
+        mediaScanner = new MediaScanner("/sdcard");
+        mediaScanner.addFinishListener(new MediaScannerFinishedListener() {
+            @Override
+            public void publishMedia(Library ne) {
+                library = ne;
+                Collections.sort(library.getTracks());
+                songs = findViewById(R.id.song_list);
+                adapter = new TrackArrayAdapter(getApplicationContext(), library.getTracks());
+                songs.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                songs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Track track = library.getTracks().get(i);
+                        audio.playStream(track.getFile().getAbsolutePath());
+                    }
+                });
+            }
+        });
+
+        mediaScanner.execute();*/

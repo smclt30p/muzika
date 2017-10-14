@@ -24,7 +24,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.muzika.views.fragments;
+package org.muzika.views.fragments.playlist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
