@@ -78,9 +78,6 @@ public class MainActivity extends FragmentActivity {
 
         startAnimation();
 
-        audio = new AudioService();
-        audio.init();
-
         tint = findViewById(R.id.pager_background);
         pager = findViewById(R.id.master_view_pager);
         drawer = findViewById(R.id.master_drawer);
