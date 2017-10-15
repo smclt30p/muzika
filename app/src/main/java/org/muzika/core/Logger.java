@@ -42,4 +42,8 @@ public class Logger {
         debug(source, String.format(format, args));
     }
 
+    public static void info(Object source, String format, Object...args) {
+        Log.i(source.getClass().getName(), String.format(format, args));
+    }
+
 }
