@@ -32,10 +32,28 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import org.muzika.R;
+import org.muzika.filesystem.MediaScanner;
+import org.muzika.filesystem.MediaScannerFinishedListener;
+import org.muzika.model.Library;
+import org.muzika.model.Track;
+import org.muzika.views.adapters.TrackArrayAdapter;
+import org.muzika.views.services.accentcolor.AccentColor;
+import org.muzika.views.services.accentcolor.AccentColorService;
+import org.muzika.views.services.media.MediaPlayerService;
+
+import java.util.Collections;
 
 public class LibraryFragment extends Fragment {
+
+    private MediaScanner mediaScanner;
+    private ListView songs;
+    private TrackArrayAdapter adapter;
+    private Library library;
+    private MediaPlayerService mediaPlayerService = MediaPlayerService.getInstance();
 
     public LibraryFragment() {
         System.out.println("creating library");
@@ -44,29 +62,34 @@ public class LibraryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_library, container, false);
-    }
-}
+        final View inflate = inflater.inflate(R.layout.fragment_library, container, false);
 
-/*
+        AccentColorService.getAccentColorService().setCurrentAccentColor(AccentColor.fromString("0xdd7a6d61"));
+
         mediaScanner = new MediaScanner("/sdcard");
         mediaScanner.addFinishListener(new MediaScannerFinishedListener() {
             @Override
             public void publishMedia(Library ne) {
                 library = ne;
                 Collections.sort(library.getTracks());
-                songs = findViewById(R.id.song_list);
-                adapter = new TrackArrayAdapter(getApplicationContext(), library.getTracks());
+                songs = inflate.findViewById(R.id.song_list);
+                adapter = new TrackArrayAdapter(getContext(), library.getTracks());
                 songs.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 songs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Track track = library.getTracks().get(i);
-                        audio.playStream(track.getFile().getAbsolutePath());
+                        mediaPlayerService.playTrack(track);
                     }
                 });
             }
         });
 
-        mediaScanner.execute();*/
+        mediaScanner.execute();
+
+
+        return inflate;
+    }
+}
+
