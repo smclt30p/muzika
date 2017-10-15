@@ -32,42 +32,79 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.muzika.R;
+import org.muzika.model.Track;
 import org.muzika.views.services.accentcolor.AccentColor;
 import org.muzika.views.services.accentcolor.AccentColorService;
+import org.muzika.views.services.media.MediaPlayerPlaybackListener;
+import org.muzika.views.services.media.MediaPlayerService;
+import org.muzika.views.services.media.MediaPlayerState;
 
-public class NowPlayingFragment extends Fragment {
+import static org.muzika.core.Logger.debug;
 
-    private Button button;
-    int index = 0;
+public class NowPlayingFragment extends Fragment implements MediaPlayerPlaybackListener, NowPlayingSeekBarChangeListener {
 
-    private AccentColor[] colors = {
-            AccentColor.fromString("0x55ff0000"),
-            AccentColor.fromString("0x5550ff00"),
-            AccentColor.fromString("0x550000ff")
-    };
+    private MediaPlayerService mediaPlayerService = MediaPlayerService.getInstance();
 
-    public NowPlayingFragment() {
-        System.out.println("creating now playing");
-    }
+    private TextView album;
+    private TextView artist;
+    private TextView title;
+    private NowPlayingSeekBar seekBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View ret = inflater.inflate(R.layout.fragment_now_playing, container, false);
-
-        button = ret.findViewById(R.id.button_teststfuff);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AccentColorService.getAccentColorService().setCurrentAccentColor(colors[index]);
-                index++;
-                if (index >= 3) index = 0;
-            }
-        });
-
+        mediaPlayerService.addPlaybackListener(this);
+        assignViews(ret);
         return ret;
     }
 
+    private void assignViews(View parent) {
+        album = parent.findViewById(R.id.nowplaying_album);
+        artist = parent.findViewById(R.id.nowplaying_artist);
+        title = parent.findViewById(R.id.nowplaying_title);
+        seekBar = parent.findViewById(R.id.nowplaying_seek_bar);
+        seekBar.addOnSeekChangeListener(this);
+    }
+
+    @Override
+    public void updateInfo(final MediaPlayerState state, final MediaPlayerService service, final Track track, final long length, final long position) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                updateUi(state, service, track, length, position);
+            }
+        });
+    }
+
+    private void updateUi(MediaPlayerState state, MediaPlayerService service, Track track, long length, long position) {
+
+        switch(state) {
+            case NEW_TRACK:
+
+                // set the info display
+                album.setText(track.getAlbumString());
+                title.setText(track.getTitleString());
+                artist.setText(track.getArtistString());
+
+                // set the seek bar range
+                seekBar.reset();
+                seekBar.setMaximum(track.getLength());
+
+                break;
+
+            case PLAYING:
+                seekBar.setPositionSeconds(position / 1000);
+        }
+
+
+
+    }
+
+    @Override
+    public void seekSong(long position) {
+        mediaPlayerService.seek(position * 1000);
+    }
 }

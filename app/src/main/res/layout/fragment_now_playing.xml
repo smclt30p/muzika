@@ -1,18 +1,69 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.muzika.views.fragments.nowplaying.NowPlayingFragment">
 
+    <org.muzika.views.fragments.nowplaying.NowPlayingAlbumArt
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_margin="20dp"
+        android:id="@+id/nowplaying_album_art">
+
+    </org.muzika.views.fragments.nowplaying.NowPlayingAlbumArt>
+
+    <org.muzika.views.fragments.nowplaying.NowPlayingButtonBar
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/nowplaying_button_bar">
+    </org.muzika.views.fragments.nowplaying.NowPlayingButtonBar>
+
+    <org.muzika.views.fragments.nowplaying.NowPlayingSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@id/nowplaying_button_bar"
+        android:id="@+id/nowplaying_seek_bar">
+    </org.muzika.views.fragments.nowplaying.NowPlayingSeekBar>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is stuff"/>
+        android:textAlignment="center"
+        android:textColor="#bbb"
+        android:textSize="18sp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/nowplaying_album"
+        android:layout_above="@+id/nowplaying_seek_bar"
+        tools:text="No More Idols"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="test stuff"
-        android:id="@+id/button_teststfuff"/>
+        android:textAlignment="center"
+        android:textColor="#bbb"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        android:layout_above="@id/nowplaying_album"
+        android:id="@+id/nowplaying_artist"
+        tools:text="Chase and Status"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:id="@+id/nowplaying_title"
+        android:layout_marginBottom="5dp"
+        android:layout_above="@id/nowplaying_artist"
+        tools:text="Blind Faith (feat. Liam Bailey)"/>
+
+</RelativeLayout>
