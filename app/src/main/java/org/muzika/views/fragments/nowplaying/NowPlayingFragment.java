@@ -43,6 +43,7 @@ import org.muzika.views.services.media.MediaPlayerService;
 import org.muzika.views.services.media.MediaPlayerState;
 
 import static org.muzika.core.Logger.debug;
+import static org.muzika.core.Logger.info;
 
 public class NowPlayingFragment extends Fragment implements MediaPlayerPlaybackListener, NowPlayingSeekBarChangeListener {
 
@@ -71,6 +72,11 @@ public class NowPlayingFragment extends Fragment implements MediaPlayerPlaybackL
 
     @Override
     public void updateInfo(final MediaPlayerState state, final MediaPlayerService service, final Track track, final long length, final long position) {
+
+        if (getActivity() == null) {
+            info(this, "Activity in now playing is null, returning");
+        }
+
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
