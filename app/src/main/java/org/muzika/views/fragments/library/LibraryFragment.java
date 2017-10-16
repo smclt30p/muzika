@@ -70,6 +70,7 @@ public class LibraryFragment extends Fragment {
         mediaScanner.addFinishListener(new MediaScannerFinishedListener() {
             @Override
             public void publishMedia(Library ne) {
+                if (ne == null) return;
                 library = ne;
                 Collections.sort(library.getTracks());
                 songs = inflate.findViewById(R.id.song_list);
