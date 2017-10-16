@@ -30,16 +30,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <org.muzika.views.basic.SquareButton
+    <org.muzika.views.basic.SquareBitmapButton
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:id="@+id/bar_button_play"
-
         android:background="@drawable/icons8play96"/>
 
-    <org.muzika.views.basic.SquareButton
+    <org.muzika.views.basic.SquareBitmapButton
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/bar_button_previous"
@@ -48,7 +47,7 @@
         android:layout_toLeftOf="@id/bar_button_play"
         android:background="@drawable/icons8back96"/>
 
-    <org.muzika.views.basic.SquareButton
+    <org.muzika.views.basic.SquareBitmapButton
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/bar_button_repeat"
@@ -60,7 +59,7 @@
         android:background="@drawable/icons8repeat96"/>
 
 
-    <org.muzika.views.basic.SquareButton
+    <org.muzika.views.basic.SquareBitmapButton
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/bar_button_play"
@@ -69,7 +68,7 @@
         android:layout_marginLeft="20dp"
         android:background="@drawable/icons8forward96"/>
 
-    <org.muzika.views.basic.SquareButton
+    <org.muzika.views.basic.SquareBitmapButton
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/bar_button_random"

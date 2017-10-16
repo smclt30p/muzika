@@ -28,19 +28,18 @@ package org.muzika.views.basic;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.Button;
 
-public class SquareButton extends Button {
+public class SquareBitmapButton extends BitmapButton {
 
-    public SquareButton(Context context) {
+    public SquareBitmapButton(Context context) {
         super(context);
     }
 
-    public SquareButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SquareBitmapButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public SquareButton(Context context, AttributeSet attrs) {
+    public SquareBitmapButton(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
