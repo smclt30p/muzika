@@ -42,7 +42,7 @@ public class MediaPlayerService extends TimerTask {
         return instance;
     }
 
-    private final ArrayList<MediaPlayerPlaybackListener> listeners;
+    private final ArrayList<OnPlaybackInfoBroadcast> listeners;
     private final AudioService audioService;
 
     private MediaPlayerState mediaPlayerState;
@@ -69,7 +69,7 @@ public class MediaPlayerService extends TimerTask {
         pingListeners();
     }
 
-    public void addPlaybackListener(MediaPlayerPlaybackListener listener) {
+    public void addPlaybackListener(OnPlaybackInfoBroadcast listener) {
         listeners.add(listener);
     }
 
@@ -104,7 +104,7 @@ public class MediaPlayerService extends TimerTask {
                 cancelTimer();
             }
         }
-        for (MediaPlayerPlaybackListener listener : listeners) {
+        for (OnPlaybackInfoBroadcast listener : listeners) {
             listener.updateInfo(mediaPlayerState, this, currentTrack, totalLength, currentPosition);
         }
     }
@@ -162,6 +162,10 @@ public class MediaPlayerService extends TimerTask {
         public void run() {
             pingListeners();
         }
+    }
+
+    public interface OnPlaybackInfoBroadcast {
+        void updateInfo(MediaPlayerState state, MediaPlayerService service, Track track, long length, long position);
     }
 
 }

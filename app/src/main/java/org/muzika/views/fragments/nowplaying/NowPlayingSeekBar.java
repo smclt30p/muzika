@@ -51,7 +51,7 @@ public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBar
     private long positionSecondsNew;
     private boolean startTrack;
 
-    private ArrayList<NowPlayingSeekBarChangeListener> listeners;
+    private ArrayList<OnChangeListener> listeners;
 
     public NowPlayingSeekBar(Context context) {
         super(context);
@@ -102,7 +102,7 @@ public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBar
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         startTrack = false;
-        for (NowPlayingSeekBarChangeListener listener : listeners) {
+        for (OnChangeListener listener : listeners) {
             listener.seekSong(positionSecondsNew);
         }
     }
@@ -144,8 +144,12 @@ public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBar
 
     }
 
-    public void addOnSeekChangeListener(NowPlayingSeekBarChangeListener listener) {
+    public void addOnSeekChangeListener(OnChangeListener listener) {
         listeners.add(listener);
+    }
+
+    public  interface OnChangeListener {
+        void seekSong(long position);
     }
 
 }

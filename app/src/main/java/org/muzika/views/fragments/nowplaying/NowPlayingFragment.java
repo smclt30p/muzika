@@ -31,21 +31,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import org.muzika.R;
 import org.muzika.model.Track;
-import org.muzika.views.services.accentcolor.AccentColor;
-import org.muzika.views.services.accentcolor.AccentColorService;
-import org.muzika.views.services.media.MediaPlayerPlaybackListener;
 import org.muzika.views.services.media.MediaPlayerService;
 import org.muzika.views.services.media.MediaPlayerState;
 
-import static org.muzika.core.Logger.debug;
 import static org.muzika.core.Logger.info;
 
-public class NowPlayingFragment extends Fragment implements MediaPlayerPlaybackListener, NowPlayingSeekBarChangeListener {
+public class NowPlayingFragment extends Fragment implements
+        MediaPlayerService.OnPlaybackInfoBroadcast,
+        NowPlayingSeekBar.OnChangeListener,
+        NowPlayingButtonBar.OnClickListener {
 
     private MediaPlayerService mediaPlayerService = MediaPlayerService.getInstance();
 
@@ -53,6 +51,7 @@ public class NowPlayingFragment extends Fragment implements MediaPlayerPlaybackL
     private TextView artist;
     private TextView title;
     private NowPlayingSeekBar seekBar;
+    private NowPlayingButtonBar buttonBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +67,8 @@ public class NowPlayingFragment extends Fragment implements MediaPlayerPlaybackL
         title = parent.findViewById(R.id.nowplaying_title);
         seekBar = parent.findViewById(R.id.nowplaying_seek_bar);
         seekBar.addOnSeekChangeListener(this);
+        buttonBar = parent.findViewById(R.id.nowplaying_button_bar);
+        buttonBar.addOnClickListener(this);
     }
 
     @Override
@@ -112,5 +113,30 @@ public class NowPlayingFragment extends Fragment implements MediaPlayerPlaybackL
     @Override
     public void seekSong(long position) {
         mediaPlayerService.seek(position * 1000);
+    }
+
+    @Override
+    public void playPressed(NowPlayingButtonBar.PlayStatus status) {
+
+    }
+
+    @Override
+    public void randomPressed(NowPlayingButtonBar.RandomStatus status) {
+
+    }
+
+    @Override
+    public void repeatPressed(NowPlayingButtonBar.RepeatStatus status) {
+
+    }
+
+    @Override
+    public void nextPressed() {
+
+    }
+
+    @Override
+    public void previousPressed() {
+
     }
 }
