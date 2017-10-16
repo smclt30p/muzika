@@ -30,6 +30,9 @@ import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
+/**
+ * This is the master pager of the app, the 3-slide one.
+ */
 public class MasterPager extends ViewPager {
 
     public MasterPager(Context context) {

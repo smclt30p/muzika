@@ -28,6 +28,9 @@ package org.muzika.model;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents an artist inside the library.
+ */
 public class Artist {
 
     private String name;
@@ -37,20 +40,28 @@ public class Artist {
         this.albums = new ArrayList<>();
     }
 
+    /**
+     * Get the artist name
+     * @return the artist name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Set the artist name
+     * @param name the name to set to
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * The albums that this artist has created
+     * @return the arists's albums
+     */
     public ArrayList<Album> getAlbums() {
         return albums;
-    }
-
-    public void setAlbums(ArrayList<Album> albums) {
-        this.albums = albums;
     }
 
     @Override

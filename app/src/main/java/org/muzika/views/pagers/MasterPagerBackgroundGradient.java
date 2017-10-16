@@ -39,7 +39,10 @@ import org.muzika.views.services.accentcolor.AccentColorService;
 
 import static org.muzika.core.Logger.debug;
 
-
+/**
+ * This is the gradient at the bottom of the master view, the pager
+ * Uses the AccentColor service to change colors.
+ */
 public class MasterPagerBackgroundGradient extends View implements AccentColorService.AccentColorChangedListener {
 
     private GradientDrawable background;

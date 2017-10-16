@@ -2,7 +2,13 @@ package org.muzika.filesystem;
 
 import java.io.Closeable;
 
+/**
+ * This is the metadata reader (IDv1, IDv2, OGG, FLAC etc.) for the tracks on disk.
+ * Uses the native library "taglib" and is implemented inside the tagreader.c file
+ * and defined in the tagreader.h header.
+ */
 class TrackMetadataReader implements TaglibReaderInterface, Closeable {
+
     @Override public native int openFile(String path);
     @Override public native void closeFile();
     @Override public native String getArtist();

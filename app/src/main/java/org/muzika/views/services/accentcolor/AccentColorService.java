@@ -30,11 +30,20 @@ import java.util.ArrayList;
 
 import static org.muzika.core.Logger.*;
 
+/**
+ * This ist the accent color service.
+ *
+ * The app has various elements that have
+ * an accent color. The accent color is dicated by the
+ * average color of the currently active album art.
+ */
 public class AccentColorService {
 
+    /**
+     * The accent color service is a singleton
+     */
     private static AccentColorService instance;
     private AccentColor currentAccentColor;
-
     private AccentColorService() {
         listeners = new ArrayList<>();
     }

@@ -87,6 +87,15 @@ public class TrackArrayAdapter extends BaseAdapter {
         return master;
     }
 
+    /**
+     * Returns the displayable data in string for for the number of
+     * seconds that was passed. For example:
+     *
+     * 90 seconds = "1:30"
+     *
+     * @param seconds number of seconds
+     * @return the textual form
+     */
     private String getStringFromSeconds(long seconds) {
         float factor = (seconds % 60) / 10.0f;
         if (factor >= 1.0f) {

@@ -28,6 +28,9 @@ package org.muzika.model;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents an album inside the library.
+ */
 public class Album {
 
     private Artist artist;
@@ -40,36 +43,76 @@ public class Album {
         this.tracks = new ArrayList<>();
     }
 
+    /**
+     * Get the name of the album
+     * @return the name of the album
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Set the name of the album
+     * @param name the name to set to
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Get the description of the album
+     * @return the album description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Set the description of the album
+     * @param description the descriptio to set to
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * The year of the album
+     * @return the year
+     */
     public int getYear() {
         return year;
     }
 
+    /**
+     * Set the year of the album
+     * @param year the year of the album
+     */
     public void setYear(int year) {
         this.year = year;
     }
 
+    /**
+     * Get the tracks that this album contains
+     * @return the track list
+     */
     public ArrayList<Track> getTracks() {
         return tracks;
     }
 
-    public void setTracks(ArrayList<Track> tracks) {
-        this.tracks = tracks;
+    /**
+     * Get the artist of the album
+     * @return the album artists
+     */
+    public Artist getArtist() {
+        return artist;
+    }
+
+    /**
+     * Set the artist of the album
+     * @param artist the artist to set to
+     */
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 
     @Override
@@ -98,11 +141,4 @@ public class Album {
         return name.hashCode();
     }
 
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Artist artist) {
-        this.artist = artist;
-    }
 }

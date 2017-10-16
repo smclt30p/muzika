@@ -37,6 +37,15 @@ import android.widget.RelativeLayout;
 
 import org.muzika.R;
 
+/**
+ * This class represents an album art placeholder inside
+ * the main view with a placeholder image. The album art is
+ * 2-layered, which enables smooth transitions between the arts.
+ *
+ * The album art is always forced to be the same height as the computed
+ * width via a onMeasure hijack.
+ *
+ */
 public class NowPlayingAlbumArt extends FrameLayout {
 
     public NowPlayingAlbumArt(Context context) {

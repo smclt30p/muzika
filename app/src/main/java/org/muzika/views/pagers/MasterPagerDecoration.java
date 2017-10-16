@@ -36,6 +36,11 @@ import android.widget.ImageView;
 
 import org.muzika.R;
 
+/**
+ * This is the small 3-icon decoration on the bottom of the page
+ * that fades icons in and out in respect to the pager position, and
+ * thus indicates where the pager is currently.
+ */
 public class MasterPagerDecoration extends FrameLayout implements ViewPager.OnPageChangeListener {
 
     private final Context context;
@@ -44,8 +49,6 @@ public class MasterPagerDecoration extends FrameLayout implements ViewPager.OnPa
     private ImageView home;
     private ImageView nowPlaying;
     private ImageView playlist;
-
-    private volatile int previous = -1;
 
     public MasterPagerDecoration(Context context) {
         super(context);
@@ -89,7 +92,6 @@ public class MasterPagerDecoration extends FrameLayout implements ViewPager.OnPa
 
     @Override
     public void onPageSelected(int position) {
-        previous = -1;
     }
 
     @Override

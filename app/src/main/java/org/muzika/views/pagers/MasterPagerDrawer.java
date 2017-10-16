@@ -31,6 +31,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 
+/**
+ * This is the drawer that the pager contains. The drawer is locked
+ * when the pager leaves the library.
+ */
 public class MasterPagerDrawer extends DrawerLayout implements ViewPager.OnPageChangeListener {
 
     public MasterPagerDrawer(Context context, AttributeSet attrs) {
@@ -46,6 +50,9 @@ public class MasterPagerDrawer extends DrawerLayout implements ViewPager.OnPageC
     private void init() {
     }
 
+    /**
+     * Locks the drawer when the pager leaves the library
+     */
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         switch(position) {

@@ -33,6 +33,10 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 
+/**
+ * This class represents the background of the pager. The background fades in response
+ * to the pagerss position.
+ */
 public class MasterPagerBackground extends View implements ViewPager.OnPageChangeListener {
 
     private static final float MAX_ALHPA = 0.45f;
@@ -52,6 +56,10 @@ public class MasterPagerBackground extends View implements ViewPager.OnPageChang
         setBackgroundColor(Color.BLACK);
     }
 
+    /**
+     * This method is hijacked to update the pager background opacity in
+     * reference to the pager scroll position
+     */
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         switch(position) {

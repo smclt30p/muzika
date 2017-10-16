@@ -29,6 +29,12 @@ package org.muzika.views.basic;
 import android.content.Context;
 import android.util.AttributeSet;
 
+/**
+ * This class represents a simple bitmap button whose
+ * size is always forced to be square by adjusting the width to the
+ * computed height. For the width, 0dp is always used inside XML
+ * declarations.
+ */
 public class SquareBitmapButton extends BitmapButton {
 
     public SquareBitmapButton(Context context) {
@@ -43,6 +49,10 @@ public class SquareBitmapButton extends BitmapButton {
         super(context, attrs);
     }
 
+    /**
+     * The hijacked onMeasure method, in which the witdh if forced to the
+     * height of the button, no matter the container.
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

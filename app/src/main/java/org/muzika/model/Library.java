@@ -28,6 +28,9 @@ package org.muzika.model;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the core music data library of Muzika.
+ */
 public class Library {
 
     private ArrayList<Track> tracks;
@@ -42,23 +45,37 @@ public class Library {
         this.invalidTags = new ArrayList<>();
     }
 
+    /**
+     * Get ALL the albums in the library
+     * @return all albums in the library
+     */
     public ArrayList<Album> getAlbums() {
         return albums;
     }
 
+    /**
+     * Get ALL the artists in the library
+     * @return all artists in the library
+     */
     public ArrayList<Artist> getArtists() {
         return artists;
     }
 
+    /**
+     * Get ALL the tracks in the library
+     * @return all the tracks in the library
+     */
     public ArrayList<Track> getTracks() {
         return tracks;
     }
 
+    /**
+     * Get ALL the tracks in the library that had invalid
+     * metadata
+     * @return all tracks with invalid metadata
+     */
     public ArrayList<Track> getInvalidTags() {
         return invalidTags;
     }
 
-    public void setInvalidTags(ArrayList<Track> invalidTags) {
-        this.invalidTags = invalidTags;
-    }
 }

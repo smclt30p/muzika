@@ -39,6 +39,10 @@ import org.muzika.R;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the seek bar with the times inside the
+ * now playing screen.
+ */
 public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBarChangeListener {
 
     private static final int STEP_MAX = 1024;
@@ -74,6 +78,9 @@ public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBar
         reset();
     }
 
+    /**
+     * Populate the class fields from the parent and attach listeners
+     */
     private void populateViews(View master) {
         totalLabel = master.findViewById(R.id.view_seek_total);
         positionLabel = master.findViewById(R.id.view_seek_position);
@@ -85,6 +92,12 @@ public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBar
     }
 
 
+    /**
+     * This is fired each time the USER interacts with the seek bar
+     *
+     * Part of SeekBar.OnSeekBarChangeListener
+     *
+     */
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (!fromUser) return;
@@ -94,11 +107,23 @@ public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBar
         positionLabel.setText(getStringFromSeconds(positionSecondsNew));
     }
 
+    /**
+     * This is fired each time the USER interacts with the seek bar
+     *
+     * Part of SeekBar.OnSeekBarChangeListener
+     *
+     */
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
         startTrack = true;
     }
 
+    /**
+     * This is fired each time the USER interacts with the seek bar
+     *
+     * Part of SeekBar.OnSeekBarChangeListener
+     *
+     */
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         startTrack = false;
@@ -107,12 +132,22 @@ public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBar
         }
     }
 
+    /**
+     * Set the maximum range of the progress bar in seconds.
+     *
+     * This should be the Track.getLength() method receiver.
+     *
+     * @param maximum the range of the progress bar
+     */
     public void setMaximum(long maximum) {
         this.totalSeconds = maximum;
         this.seekBar.setMax(STEP_MAX);
         totalLabel.setText(getStringFromSeconds(maximum));
     }
 
+    /**
+     * Resets the seekbar and prepares it for the next song
+     */
     public void reset() {
         totalSeconds = 0;
         seekBar.setProgress(0);
@@ -120,6 +155,11 @@ public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBar
         totalLabel.setText("00:00");
     }
 
+    /**
+     * Sets the position of the seek bar. This is to be used by
+     * external stimulation, NOT the internal bar mechanisms
+     * @param positionSeconds the position in seconds
+     */
     public void setPositionSeconds(long positionSeconds) {
         if (totalSeconds == 0) return;
         if (!startTrack) {
@@ -128,12 +168,25 @@ public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBar
         }
     }
 
+    /**
+     * Set the seek bar position from the number of total seconds and the
+     * number of seconds elapsed.
+     */
     private void setSeekBarFromSeconds(long positionSeconds, long totalSeconds) {
         float seekFactor = ((float) positionSeconds) / ((float) totalSeconds);
         int seek = (int) (1024.0f * seekFactor);
         seekBar.setProgress(seek);
     }
 
+    /**
+     * Returns the displayable data in string for for the number of
+     * seconds that was passed. For example:
+     *
+     * 90 seconds = "1:30"
+     *
+     * @param seconds number of seconds
+     * @return the textual form
+     */
     private String getStringFromSeconds(long seconds) {
         float factor = (seconds % 60) / 10.0f;
         if (factor >= 1.0f) {
@@ -148,7 +201,7 @@ public class NowPlayingSeekBar extends LinearLayout implements SeekBar.OnSeekBar
         listeners.add(listener);
     }
 
-    public  interface OnChangeListener {
+     interface OnChangeListener {
         void seekSong(long position);
     }
 

@@ -40,6 +40,11 @@ import org.muzika.views.services.media.MediaPlayerState;
 
 import static org.muzika.core.Logger.info;
 
+
+/**
+ * The NowPlaying fragment inside the app, the main view.
+ * TODO: Implement
+ */
 public class NowPlayingFragment extends Fragment implements
         MediaPlayerService.OnPlaybackInfoBroadcast,
         NowPlayingSeekBar.OnChangeListener,

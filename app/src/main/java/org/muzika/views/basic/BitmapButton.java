@@ -32,12 +32,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.StateSet;
 
+/**
+ * This class represents a button that has no text
+ * but has only one bitmap inside of it (like the play button)
+ */
 public class BitmapButton extends android.widget.Button {
 
     public BitmapButton(Context context) {
@@ -52,6 +54,16 @@ public class BitmapButton extends android.widget.Button {
         super(context, attrs, defStyleAttr);
     }
 
+    /**
+     * This method hijacks the incoming bitmap and adds a layer
+     * behind it that respods to user input.
+     *
+     * The background of the button is 2-layered, the bitmap
+     * infront of the back layer, and the back layer whos alpha
+     * level is adjusted to be 0 if the button is not pressed and
+     * 64 if the button is pressed.
+     * @param background the background bitmap
+     */
     @Override
     public void setBackground(Drawable background) {
 
@@ -62,6 +74,14 @@ public class BitmapButton extends android.widget.Button {
         super.setBackground(new ButtonBackground((BitmapDrawable) background));
     }
 
+    /**
+     * This class layers a solid color layer behind a bitmap for
+     * indication of user interaction. The layer is transparent if
+     * no user input is present and is level 64 if the user presses the button.
+     *
+     * This was implemented becauase the "alpha" propery of the drawable is not
+     * settable with XML.
+     */
     private static class ButtonBackground extends StateListDrawable {
 
         private final Drawable[] backgroundLayers = new Drawable[2];

@@ -35,6 +35,11 @@ import java.util.TimerTask;
 
 import static org.muzika.core.Logger.*;
 
+/**
+ * This class represents the media player of the app, that
+ * features dynamic events to update the UI and notification
+ * at a rate of 2Hz.
+ */
 public class MediaPlayerService extends TimerTask {
 
     private static final MediaPlayerService instance = new MediaPlayerService();
@@ -73,11 +78,18 @@ public class MediaPlayerService extends TimerTask {
         listeners.add(listener);
     }
 
+    /**
+     * Restart the timer that fires the events
+     */
     private void restartTimer() {
         cancelTimer();
         this.playbackTimer.schedule(timerTask, 0, 500);
     }
 
+    /**
+     * Play a track
+     * @param track the track to play
+     */
     public void playTrack(Track track) {
         this.audioService.playStream(track.getFile().getAbsolutePath());
         this.currentTrack = track;
@@ -88,6 +100,10 @@ public class MediaPlayerService extends TimerTask {
         restartTimer();
     }
 
+    /**
+     * Seek the currently playing track
+     * @param currentPosition the position to seek to
+     */
     public void seek(long currentPosition) {
         this.currentPosition = currentPosition;
         if (mediaPlayerState != MediaPlayerState.INVALID) {
@@ -96,6 +112,9 @@ public class MediaPlayerService extends TimerTask {
         pingListeners();
     }
 
+    /**
+     * Fire all event listeners
+     */
     private void pingListeners() {
         if (mediaPlayerState != MediaPlayerState.INVALID) {
             currentPosition = audioService.getCurrentPosition();
@@ -109,6 +128,9 @@ public class MediaPlayerService extends TimerTask {
         }
     }
 
+    /**
+     * Cancel the event listeners timer
+     */
     private void cancelTimer() {
         this.timerTask.cancel();
         this.timerTask = new MediaPlayerTimerTask();
@@ -117,6 +139,10 @@ public class MediaPlayerService extends TimerTask {
         this.playbackTimer = new Timer();
     }
 
+    /**
+     * Set the pause state of the player
+     * @param paused the state
+     */
     public void setPaused(boolean paused) {
 
         switch (mediaPlayerState) {

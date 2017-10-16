@@ -37,7 +37,6 @@ import android.widget.ListView;
 
 import org.muzika.R;
 import org.muzika.filesystem.MediaScanner;
-import org.muzika.filesystem.MediaScannerFinishedListener;
 import org.muzika.model.Library;
 import org.muzika.model.Track;
 import org.muzika.views.adapters.TrackArrayAdapter;
@@ -64,10 +63,10 @@ public class LibraryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View inflate = inflater.inflate(R.layout.fragment_library, container, false);
 
-        AccentColorService.getAccentColorService().setCurrentAccentColor(AccentColor.fromString("0xdd7a6d61"));
+        AccentColorService.getAccentColorService().setCurrentAccentColor(AccentColor.fromString("0xdd3a3a3a"));
 
-        mediaScanner = new MediaScanner("/sdcard");
-        mediaScanner.addFinishListener(new MediaScannerFinishedListener() {
+        mediaScanner = new MediaScanner("/storage");
+        mediaScanner.addFinishListener(new MediaScanner.OnScannerFinish() {
             @Override
             public void publishMedia(Library ne) {
                 if (ne == null) return;

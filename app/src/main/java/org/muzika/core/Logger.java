@@ -28,20 +28,55 @@ package org.muzika.core;
 
 import android.util.Log;
 
+/**
+ * This is a bridge between the Android logging
+ * framework and a few simple methods that can be imported
+ * statically and be called without any class prefix.
+ *
+ * For ex:
+ *
+ * import static org.muzika.core.Logger.*;
+ *
+ * debug("Hello, world!");
+ */
 public class Logger {
 
+    /**
+     * Debug toggle switch, if this is disabled all DEBUG
+     * level messages are discarded (not printed)
+     */
     private static final boolean ENABLE_DEBUG = true;
 
+    /**
+     * DEBUG level message, optional, can be disabled.
+     *
+     * @param source the source object, should always pass "this"
+     * @param data the data to be logged
+     */
     public static void debug(Object source, Object data) {
         if (!ENABLE_DEBUG) return;
         Log.d(source.getClass().getName(), data.toString());
     }
 
+    /**
+     * DEBUG level message, optional, can be disabled.
+     *
+     * @param source the source object, should always pass "this"
+     * @param format the printf format to format to
+     * @param args the printf arguments
+     */
     public static void debug(Object source, String format, Object...args) {
         if (!ENABLE_DEBUG) return;
         debug(source, String.format(format, args));
     }
 
+    /**
+     * INFO level messsages.
+     *
+     * @param source the source object, should always pass "this"
+     * @param format the printf format to format to
+     * @param args the printf arguments
+     */
     public static void info(Object source, String format, Object...args) {
         Log.i(source.getClass().getName(), String.format(format, args));
     }

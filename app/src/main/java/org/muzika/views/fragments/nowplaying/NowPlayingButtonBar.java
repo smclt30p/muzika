@@ -40,6 +40,10 @@ import org.muzika.views.basic.SquareBitmapButton;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the control buttons in the main view
+ * (Play, Pause, Repeat, Random, Next, Previous)
+ */
 public class NowPlayingButtonBar extends RelativeLayout implements Button.OnClickListener {
 
     private SquareBitmapButton playButton;
@@ -68,6 +72,10 @@ public class NowPlayingButtonBar extends RelativeLayout implements Button.OnClic
 
     }
 
+    /**
+     * This gets triggered when the play button is pressed.
+     * The icon and state are changed and event listerers fired.
+     */
     private void playPressed() {
 
         switch (playStatus) {
@@ -87,6 +95,10 @@ public class NowPlayingButtonBar extends RelativeLayout implements Button.OnClic
 
     }
 
+    /**
+     * This gets triggered when the repeat button is pressed.
+     * The icon and state are changed and event listerers fired.
+     */
     private void repeatPressed() {
 
         switch (repeatStatus) {
@@ -112,6 +124,10 @@ public class NowPlayingButtonBar extends RelativeLayout implements Button.OnClic
         
     }
 
+    /**
+     * This gets triggered when the random button is pressed.
+     * The icon and state are changed and event listerers fired.
+     */
     private void randomPressed() {
 
         switch (randomStatus) {
@@ -131,12 +147,20 @@ public class NowPlayingButtonBar extends RelativeLayout implements Button.OnClic
 
     }
 
+    /**
+     * This gets triggered when the next button is pressed.
+     * Event listerers are fired.
+     */
     private void nextPressed() {
         for (OnClickListener listener : listeners) {
             listener.nextPressed();
         }
     }
 
+    /**
+     * This gets triggered when the previous button is pressed.
+     * Event listerers are fired.
+     */
     private void previousPressed() {
         for (OnClickListener listener : listeners) {
             listener.previousPressed();
@@ -164,10 +188,19 @@ public class NowPlayingButtonBar extends RelativeLayout implements Button.OnClic
         listeners.add(listener);
     }
 
+    /**
+     * Sets the playing status of the play/pause icon inside the bar.
+     * @param status the status to set
+     */
     public void setPlayingStatus(PlayStatus status) {
         this.playStatus = status;
+        // TODO: Implement
     }
 
+    /**
+     * Sets the repeat icon inside the bar.
+     * @param status the status to set to
+     */
     public void setRepeatStatus(RepeatStatus status) {
         this.repeatStatus = status;
 
@@ -180,6 +213,7 @@ public class NowPlayingButtonBar extends RelativeLayout implements Button.OnClic
             case REPEAT_ONE:
                 break;
 
+            // TODO: Implement
 
         }
 
@@ -204,6 +238,9 @@ public class NowPlayingButtonBar extends RelativeLayout implements Button.OnClic
 
     }
 
+    /**
+     * This populates the class fields with the view from the inflated layout
+     */
     private void populateViews(View parent) {
         this.playButton = parent.findViewById(R.id.bar_button_play);
         this.repeatButton = parent.findViewById(R.id.bar_button_repeat);
@@ -224,7 +261,11 @@ public class NowPlayingButtonBar extends RelativeLayout implements Button.OnClic
         getLayoutParams().height = Math.round(height);
     }
 
-    public interface OnClickListener {
+    /**
+     *  This interface is to be used to cause events to happen when
+     *  icons on the bar are clicked.
+     */
+    interface OnClickListener {
         void playPressed(PlayStatus status);
         void randomPressed(RandomStatus status);
         void repeatPressed(RepeatStatus status);

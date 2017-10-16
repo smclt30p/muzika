@@ -65,7 +65,7 @@ public class MediaScanner extends AsyncTask<Void, Void, Library> {
     private static final int FIND_NOT_FOUND = -2;
 
     private ArrayList<Track> walkedFiles = new ArrayList<>();
-    private MediaScannerFinishedListener listener;
+    private OnScannerFinish listener;
     private TrackMetadataReader metadataReader = new TrackMetadataReader();
     private volatile Library library = new Library();
     private final String root;
@@ -230,7 +230,7 @@ public class MediaScanner extends AsyncTask<Void, Void, Library> {
      * Attach a listener that gets the scanned tracks.
      * @param finishedListener the listener to attach
      */
-    public void addFinishListener(MediaScannerFinishedListener finishedListener) {
+    public void addFinishListener(OnScannerFinish finishedListener) {
         this.listener = finishedListener;
     }
 
@@ -266,6 +266,15 @@ public class MediaScanner extends AsyncTask<Void, Void, Library> {
 
         return FIND_NOT_FOUND;
 
+    }
+
+    /**
+     * This is a functional interface that can be attached
+     * to a MediaScanner. This receives the tracks that were
+     * discovered by scanning.
+     */
+    public interface OnScannerFinish {
+        void publishMedia(Library library);
     }
 
 }
