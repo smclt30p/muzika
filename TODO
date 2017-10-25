@@ -1,0 +1,3 @@
+1) Implement high-pass image filter using kernel convolution with Gauss's curve (Gaussian Blur) (C)
+2) Implement ID3 album art fetching from file (C)
+3) Implement the library layout (Java/XML)
