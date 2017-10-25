@@ -1,3 +1,5 @@
 1) Implement high-pass image filter using kernel convolution with Gauss's curve (Gaussian Blur) (C)
 2) Implement ID3 album art fetching from file (C)
 3) Implement the library layout (Java/XML)
+4) Implement a way to decode PNG/JPEG image data into an ARGB matrix. libjpeg/libpng? (C/Java)
+
