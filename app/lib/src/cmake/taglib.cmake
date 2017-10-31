@@ -2,11 +2,11 @@ include(ExternalProject)
 
 # taglib configuration
 set(TAGLIB_VERSION 1.11.1)
-set(TAGLIB_CHECKSUM "8624219ba50c77f17889af15e1ca5f7d")
+set(TAGLIB_CHECKSUM "cee7be0ccfc892fa433d6c837df9522a")
 
 ExternalProject_Add(
     taglib
-    URL ${CMAKE_CURRENT_SOURCE_DIR}/external/taglib-${TAGLIB_VERSION}.zip
+    URL ${CMAKE_CURRENT_SOURCE_DIR}/external/taglib-${TAGLIB_VERSION}.tar.gz
     URL_MD5 ${TAGLIB_CHECKSUM}
     CONFIGURE_COMMAND ${CMAKE_COMMAND}
                       ${CMAKE_CURRENT_BINARY_DIR}/taglib/src/taglib

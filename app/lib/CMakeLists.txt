@@ -5,13 +5,13 @@ project(Muzika NONE)
 include(ExternalProject)
 
 # Set up Android SDK and NDK
-set(ANDROID_BUILD_HOST_ARCH "windows-x86_64")
+set(ANDROID_BUILD_HOST_ARCH "linux-x86_64")
 set(ANDROID_NATIVE_API_LEVEL 17)
 
-set(ANDROID_SDK "C:/Android/sdk")
+set(ANDROID_SDK "/home/gala/Android/sdk")
 set(ANDROID_NDK "${ANDROID_SDK}/ndk-bundle")
 set(ANDROID_TOOLCHAIN "${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
-set(ANDROID_MAKE_PROGRAM "${ANDROID_NDK}/prebuilt/${ANDROID_BUILD_HOST_ARCH}/bin/make.exe")
+set(ANDROID_MAKE_PROGRAM "${ANDROID_NDK}/prebuilt/${ANDROID_BUILD_HOST_ARCH}/bin/make")
 
 set(ANDROID_TARGET_ABI armeabi-v7a x86)
 

@@ -25,7 +25,8 @@ set(libmuzika_hdrs
 add_library(muzika SHARED ${libmuzika_srcs} ${libmuzika_hdrs})
 
 add_dependencies(fmod libfmod)
-add_dependencies(muzika fmod)
+add_dependencies(tag taglib)
+add_dependencies(muzika fmod tag)
 
 target_link_libraries(muzika fmod android log tag)
 
